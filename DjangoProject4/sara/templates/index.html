@@ -1,0 +1,106 @@
+
+<html>
+<head><title></title></head>
+
+<body>
+
+
+
+
+
+ <div style="width: 90%; margin-left: auto; margin-right: auto;">
+          <h1 style="text-align:center;">Python, Django,Mysql </h1>
+          <br />
+
+          <div style="width: 45%; float: right; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; min-height: 246px; border-radius:5%; ">
+        Result From Datastore
+<div style="width:100%; background-color:white; border:1px solid black;">
+                  <div style=" height: 18px; overflow: hidden;">
+                      <div style="width: 10%;  float: left; border-right: 1px solid black;">
+                          id               
+                      </div>
+                      <div style="width: 10%;  float: left; border-right: 1px solid black;">
+                          Name
+                      </div>
+                      <div style="width: 20%;  float: left; border-right: 1px solid black; ">
+                         Fname
+                      </div>
+                      <div style="width: 20%;  float: left; border-right: 1px solid black; ">
+                         Email
+                      </div>
+                      <div style="width: 21%; float: left; border: 0px solid black;">
+                        Note
+                      </div>
+                      <div style="width: 16%; float: left; border: 0px solid black; height: 18px; overflow: hidden; ">
+                      </div>
+</div>
+                  {% for c in content %}
+
+                  <blockquote style="margin-left: 0px; margin-right: 0px;margin-top: 0px; border: 1px solid black; ">
+
+                      <div style="width: 10%; float: left; border-right: 1px solid black; height: 18px; overflow: hidden; ">
+                          {{ c.id }}
+                      </div>
+                      <div style="width: 10%; float: left; border-right: 1px solid black; height: 18px; overflow: hidden; ">
+                          {{ c.name }}
+                      </div>
+                      <div style="width: 20%; float: left; border-right: 1px solid black; height: 18px; overflow: hidden; ">
+                          fname
+                      </div>
+                      <div style="width: 20%; float: left; border-right: 1px solid black; height: 18px; overflow: hidden; ">
+                          {{ c.email }}
+                      </div>
+                      <div style="width: 21%; float: left; border: 0px solid black; height: 18px; overflow: hidden; ">
+                          note
+                          
+                      </div>
+
+                      <div style="width: 16%; float: left; border: 0px solid black; height: 18px; overflow: hidden; ">
+                         
+                          <form action="/retrieve?" method="post">
+                              <!--action="/"-->
+
+                              <button type="submit" value="{{ greeting.id2 }}" name="editwhat" style="width:20px; float: right; height:18px; background-image: url(http://png-4.findicons.com/files/icons/2226/matte_basic/16/edit.png); "> </button>
+                          </form>
+                          <form action="/delete?" method="post" >
+                              <button type="submit" value="{{ greeting.id2 }}" name="deletewhat" style="width: 20px; float: right; height: 18px; background-image: url( http://icons.iconarchive.com/icons/visualpharm/must-have/16/Delete-icon.png); "> </button>
+                          </form>
+                      </div>
+
+
+                  </blockquote>
+                  {% endfor %}
+              </div>
+ </div>
+
+              
+          </div>
+          <div id="DefaultMode" style="width: 45%; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; border-radius: 5%; visibility:{{VIS1}}" >
+              <form action="" method="post">
+                  <div>Name<br /><textarea name="name" rows="1" cols="40">{{ aaa_name }}</textarea></div>
+                  <div>Family Name<br /><textarea value="{{ aaa_fname }}" name="fname" rows="1" cols="40"></textarea></div>
+                  <div>Email Address<br /><textarea value="{{ aaa_email }}" name="email" rows="1" cols="40"></textarea></div>
+                  <div>Note<br /><textarea value="{{ aaa_note }}" name="content" rows="3" cols="40"></textarea></div>
+                  <div style="margin-left: auto; margin-right: auto; width:100%;"><input type="submit" value="Submit"></div>
+
+              </form>
+          </div>
+<!--
+          <div id="EditMode" style="width: 40%; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; border-radius: 5%; position: absolute; left: 67px; top: 100px; visibility:{{VIS}};" >
+              <form action="/edit" method="post">
+                  <div>Name<br /><textarea name="name" rows="1" cols="40">{{ aaa_name }}</textarea></div>
+                  <div>Family Name<br /><textarea  name="fname" rows="1" cols="40">{{ aaa_fname }}</textarea></div>
+                  <div>Email Address<br /><textarea  name="email" rows="1" cols="40">{{ aaa_email }}</textarea></div>
+                  <div>Note<br /><textarea  name="content" rows="3" cols="40">{{ aaa_note }}</textarea></div>
+
+                  <div style="margin-left: auto; margin-right: auto; width:100%;"><button type="submit" value="{{ aaa_id2 }}" name="edwhat">Save</button></div>
+              </form>
+          </div>
+
+          <hr>
+         
+-->
+          <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+</body>
+</html>
