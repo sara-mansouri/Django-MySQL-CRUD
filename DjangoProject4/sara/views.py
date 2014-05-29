@@ -3,18 +3,18 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
+from django.template import RequestContext, loader
 
 from django.http import HttpResponse
-from django.template import RequestContext, loader
+from django.shortcuts import render
 from sara.models import Person
 
 
 def ss(request):
     if request.method == 'GET':
         output=Person.objects.all()
-        template= loader.get_template('index.html')
-        context=RequestContext(request,{'content':output,})
-        return HttpResponse(template.render(context))
+        context = {'content': output}
+        return render(request, 'index.html', context)
     if request.method == 'POST' and 'submitwhat' in request.POST:
         fard = Person()
         fard.name = request.POST['name']
@@ -22,9 +22,9 @@ def ss(request):
         fard.save()
         
         output=Person.objects.all()
-        template= loader.get_template('index.html')
-        context=RequestContext(request,{'content':output,})
-        return HttpResponse(template.render(context))
+        
+        temp={'content':output,}
+        return render(request, 'index.html', temp)
       #  return HttpResponse(template.render(context))
       #  return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
     
@@ -40,17 +40,32 @@ def ss(request):
         return HttpResponse(template.render(context))
 
     if request.method=='POST' and 'retwhat' in request.POST:
-        fard = Person()
-        fard.delete(Person)
+        retwhat = request.POST["retwhat"]
+        fard = Person.objects.get(id = int(retwhat))
+        
+ 
+        temp = {
+            'aaa_id':retwhat,
+            'aaa_name': fard.name,
+            'aaa_email': fard.email,
+            'VIS':'visibile',
+            'VIS1':'hidden',
+        }
+        return render(request, 'index.html', temp)
+
+    if request.method=='POST' and 'edwhat' in request.POST:
+        edwhat=request.POST['edwhat']
+        fard = Person.objects.get(id = int(edwhat))
+
+        
+        fard.name = request.POST['name']
+        fard.email = request.POST['email']
+        fard.save()
         
         output=Person.objects.all()
-        template= loader.get_template('index.html')
-        context=RequestContext(request,{'content':output,})
-        return HttpResponse(template.render(context))
-
-    if request.method=='POST' and 'edittewhat' in request.POST:
-        fard = Person()
-        fard.delete(Person)
+        
+        temp={'content':output,}
+        return render(request, 'index.html', temp)
         
         output=Person.objects.all()
         template= loader.get_template('index.html')
