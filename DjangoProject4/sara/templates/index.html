@@ -60,10 +60,11 @@
                           <form action="/retrieve?" method="post">
                               <!--action="/"-->
 
-                              <button type="submit" value="{{ greeting.id2 }}" name="editwhat" style="width:20px; float: right; height:18px; background-image: url(http://png-4.findicons.com/files/icons/2226/matte_basic/16/edit.png); "> </button>
+                              <button type="submit" value="{{ greeting.id2 }}" name="retwhat" style="width:20px; float: right; height:18px; background-image: url(http://png-4.findicons.com/files/icons/2226/matte_basic/16/edit.png); "> </button>
                           </form>
-                          <form action="/delete?" method="post" >
-                              <button type="submit" value="{{ greeting.id2 }}" name="deletewhat" style="width: 20px; float: right; height: 18px; background-image: url( http://icons.iconarchive.com/icons/visualpharm/must-have/16/Delete-icon.png); "> </button>
+                          <form  method="post" >
+{% csrf_token %}
+                              <button type="submit" value="{{ c.id }}" name="deletewhat" style="width: 20px; float: right; height: 18px; background-image: url( http://icons.iconarchive.com/icons/visualpharm/must-have/16/Delete-icon.png); top: -18px;position: relative;" > </button>
                           </form>
                       </div>
 
@@ -77,11 +78,12 @@
           </div>
           <div id="DefaultMode" style="width: 45%; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; border-radius: 5%; visibility:{{VIS1}}" >
               <form action="" method="post">
+{% csrf_token %}
                   <div>Name<br /><textarea name="name" rows="1" cols="40">{{ aaa_name }}</textarea></div>
                   <div>Family Name<br /><textarea value="{{ aaa_fname }}" name="fname" rows="1" cols="40"></textarea></div>
                   <div>Email Address<br /><textarea value="{{ aaa_email }}" name="email" rows="1" cols="40"></textarea></div>
                   <div>Note<br /><textarea value="{{ aaa_note }}" name="content" rows="3" cols="40"></textarea></div>
-                  <div style="margin-left: auto; margin-right: auto; width:100%;"><input type="submit" value="Submit"></div>
+                  <div style="margin-left: auto; margin-right: auto; width:100%;"><input type="submit" value="Submit" name="submitwhat"></div>
 
               </form>
           </div>

@@ -10,16 +10,49 @@ from sara.models import Person
 
 
 def ss(request):
-    output=Person.objects.all()
-    template= loader.get_template('index.html')
-    context=RequestContext(request,{'content':output,})
+    if request.method == 'GET':
+        output=Person.objects.all()
+        template= loader.get_template('index.html')
+        context=RequestContext(request,{'content':output,})
+        return HttpResponse(template.render(context))
+    if request.method == 'POST' and 'submitwhat' in request.POST:
+        fard = Person()
+        fard.name = request.POST['name']
+        fard.email = request.POST['email']
+        fard.save()
+        
+        output=Person.objects.all()
+        template= loader.get_template('index.html')
+        context=RequestContext(request,{'content':output,})
+        return HttpResponse(template.render(context))
+      #  return HttpResponse(template.render(context))
+      #  return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+    
+    if request.method=='POST' and 'deletewhat' in request.POST:
+        #report = Person.query(Person.id == int(delWhat)).get()
+        delWhat = request.POST["deletewhat"]
+        fard = Person.objects.filter(id = int(delWhat))
+        fard.delete()
+        
+        output=Person.objects.all()
+        template= loader.get_template('index.html')
+        context=RequestContext(request,{'content':output,})
+        return HttpResponse(template.render(context))
 
-    return HttpResponse(template.render(context))
-#class a(webapp2.RequestHandler):
-def submitit(self):
-         Person.name = self.request.get('name')
-         Person.email = self.request.get('email')
-         Person.put()
+    if request.method=='POST' and 'retwhat' in request.POST:
+        fard = Person()
+        fard.delete(Person)
+        
+        output=Person.objects.all()
+        template= loader.get_template('index.html')
+        context=RequestContext(request,{'content':output,})
+        return HttpResponse(template.render(context))
 
-         self.redirect('/?' + urllib.urlencode(query_params))
-
+    if request.method=='POST' and 'edittewhat' in request.POST:
+        fard = Person()
+        fard.delete(Person)
+        
+        output=Person.objects.all()
+        template= loader.get_template('index.html')
+        context=RequestContext(request,{'content':output,})
+        return HttpResponse(template.render(context))
