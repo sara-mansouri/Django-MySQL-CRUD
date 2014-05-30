@@ -13,7 +13,11 @@ from sara.models import Person
 def ss(request):
     if request.method == 'GET':
         output=Person.objects.all()
-        context = {'content': output}
+        context = {
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                   'content': output
+                   }
         return render(request, 'index.html', context)
     if request.method == 'POST' and 'submitwhat' in request.POST:
         fard = Person()
@@ -23,8 +27,12 @@ def ss(request):
         
         output=Person.objects.all()
         
-        temp={'content':output,}
-        return render(request, 'index.html', temp)
+        temp1={
+              'content':output,
+              'VIS':'hidden',
+              'VIS1':'visibile',
+              }
+        return render(request, 'index.html', temp1)
       #  return HttpResponse(template.render(context))
       #  return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
     
@@ -36,7 +44,10 @@ def ss(request):
         
         output=Person.objects.all()
         template= loader.get_template('index.html')
-        context=RequestContext(request,{'content':output,})
+        context=RequestContext(request,{
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                   'content':output,})
         return HttpResponse(template.render(context))
 
     if request.method=='POST' and 'retwhat' in request.POST:
@@ -64,10 +75,43 @@ def ss(request):
         
         output=Person.objects.all()
         
-        temp={'content':output,}
+        temp={'content':output,
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                }
         return render(request, 'index.html', temp)
         
         output=Person.objects.all()
         template= loader.get_template('index.html')
         context=RequestContext(request,{'content':output,})
         return HttpResponse(template.render(context))
+
+    if request.method == 'POST'and 'sortup' in request.POST:
+        output=Person.objects.all(). order_by('name')
+        context = context = {
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                   'content': output
+                   }
+        return render(request, 'index.html', context)
+    
+    if request.method == 'POST'and 'sortdown' in request.POST:
+        output=Person.objects.all(). order_by('-name')
+        context = context = {
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                   'content': output
+                   }
+        return render(request, 'index.html', context)
+
+    if request.method == 'POST' and 'search' in request.POST:
+        pname = request.POST["pname"]
+
+        output=Person.objects.all().filter(name=pname)
+        context = context = {
+                   'VIS':'hidden',
+                   'VIS1':'visibile',
+                   'content': output
+                   }
+        return render(request, 'index.html', context)
+    

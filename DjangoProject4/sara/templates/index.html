@@ -14,10 +14,26 @@
 
           <div style="width: 45%; float: right; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; min-height: 246px; border-radius:5%; ">
         Result From Datastore
+
+              <form  method="post">
+{% csrf_token %}
+                  Search for Name:
+                  <input value="{{ pname }}" name="pname">
+                  <button type="submit" name="search" >Search for Names</button>
+              </form>
+              <br />
 <div style="width:100%; background-color:white; border:1px solid black;">
                   <div style=" height: 18px; overflow: hidden;">
                       <div style="width: 10%;  float: left; border-right: 1px solid black;">
-                          id               
+                          <form  method="post">
+{% csrf_token %}
+                              <!--action="/"-->
+                              <button type="submit" name="sortup" style="width: 15px; float: right; height: 16px; background-image: url( https://www.google.com/help/hc/images/sites_icon_arrow_up_small.gif); "></button>
+                          </form>
+                          <form  method="get">
+                              <!--action="/"-->
+                              <button type="submit" name="sortdown" style="width: 15px; float: right; height: 16px; background-image: url( https://www.google.com/help/hc/images/sites_icon_arrow_down_small.gif); top: -18px; right:+18px; position: relative; "></button>
+                          </form>               
                       </div>
                       <div style="width: 10%;  float: left; border-right: 1px solid black;">
                           Name
@@ -88,7 +104,7 @@
               </form>
           </div>
 
-          <div id="EditMode" style="width: 40%; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; border-radius: 5%; position: absolute; left: 67px; top: 100px; visibility:{{VIS}};" >
+          <div id="EditMode" style="width: 40%; background-color: #e5eecc; padding-left: 15px; padding-right: 15px; border-radius: 5%; position: absolute; left: 67px; top: 80px; visibility:{{VIS}};" >
               <form  method="post">
 {% csrf_token %}
                   <div>Name<br /><textarea name="name" rows="1" cols="40">{{ aaa_name }}</textarea></div>
